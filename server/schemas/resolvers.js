@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 const { User } = require('../models')
 const { signToken, AuthenticationError } = require('../utils/auth');
 
@@ -67,4 +70,8 @@ const resolvers = {
     },
 }
 
+<<<<<<< Updated upstream
 module.exports = resolvers
+=======
+module.exports = resolvers
+>>>>>>> Stashed changes

@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+// see SignupForm.js for comments
+import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
@@ -13,14 +15,6 @@ const LoginForm = () => {
 
   const [login, { error }] = useMutation(LOGIN_USER);
 
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -29,6 +23,7 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -40,14 +35,17 @@ const LoginForm = () => {
         variables: { ...userFormData },
       });
 
-      console.log(data);
+      
+
+       
       Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
     }
 
-    // clear form values
     setUserFormData({
+      username: '',
       email: '',
       password: '',
     });
